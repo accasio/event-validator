@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PostNL Simple Event",
+  "type": "object",
+  "required": ["eventId", "eventType", "payload"],
+  "properties": {
+    "eventId": {
+      "type": "string"
+    },
+    "eventType": {
+      "type": "string"
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "parcelId": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["parcelId", "status"]
+    }
+  }
+}
