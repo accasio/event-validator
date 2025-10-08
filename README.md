@@ -3,11 +3,6 @@
 This project implements an **AWS Lambda function** that uses **Apache Camel** to validate incoming producer events
 against predefined schemas before forwarding them to an event broker (e.g. AWS EventBridge).
 
-It is part of the broader **PostNL-style event broker platform**, where:
-- Producers register events and schemas via a self-service portal.
-- Events are validated before entering the EventBridge.
-- Validated events are published to the EventBridge.
-
 ---
 
 ## Features
@@ -31,4 +26,28 @@ It is part of the broader **PostNL-style event broker platform**, where:
 Run the Lambda handler locally using its built-in `main()` method:
 ```bash
 mvn compile exec:java -Dexec.mainClass=org.postnl.validation.AWSLambdaHandler
+```
 
+## Example Input 
+```json 
+{
+  "eventId": "123",
+  "eventType": "org.postnl.parcel.created:v1",
+  "payload": {
+    "parcelId": "P12345",
+    "status": "CREATED"
+  }
+}
+```
+
+You’ll see logs in the console, and generated files under:
+
+- output/valid.json — for valid events
+- output/invalid.json — for invalid ones
+
+
+Run tests
+
+```bash
+mvn test
+```
